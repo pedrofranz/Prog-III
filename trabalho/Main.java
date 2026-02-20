@@ -4,15 +4,42 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
         Scanner ler = new Scanner(System.in);
 
         while (true) {
+            System.out.println("\n===== MENU PRINCIPAL =====");
+            System.out.println("1 - Modo Console");
+            System.out.println("2 - Modo Gráfico");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
 
-            System.out.println("\n===== MENU =====");
+            int opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    menuConsole(ler);
+                    break;
+                case 2:
+                    System.out.println("Abrindo interface gráfica...");
+                    InterfaceGrafica.main(args);
+                    break;
+                case 0:
+                    System.out.println("Encerrando...");
+                    ler.close();
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+    }
+
+    public static void menuConsole(Scanner ler) {
+        while (true) {
+            System.out.println("\n===== MENU CONSOLE =====");
             System.out.println("1 - Calcular área de UMA forma (modo interativo)");
             System.out.println("2 - Calcular soma das áreas (modo automático)");
-            System.out.println("0 - Sair");
+            System.out.println("0 - Voltar ao menu principal");
             System.out.print("Escolha: ");
 
             int opcao = ler.nextInt();
@@ -25,8 +52,6 @@ public class Main {
                     calcularSomaAreas();
                     break;
                 case 0:
-                    System.out.println("Encerrando...");
-                    ler.close();
                     return;
                 default:
                     System.out.println("Opção inválida!");
@@ -51,35 +76,33 @@ public class Main {
         Forma f = null;
 
         try {
-
             switch (tipo) {
                 case 1:
-                    System.out.println("Raio: ");
+                    System.out.print("Raio: ");
                     f = new Circulo(ler.nextDouble());
                     break;
-            
                 case 2:
-                    System.out.println("Lado: ");
+                    System.out.print("Lado: ");
                     f = new Quadrado(ler.nextDouble());
                     break;
                 case 3:
-                    System.out.println("Base: ");
+                    System.out.print("Base: ");
                     double b = ler.nextDouble();
-                    System.out.println("Altura: ");
+                    System.out.print("Altura: ");
                     double a = ler.nextDouble();
                     f = new Retangulo(b, a);
                     break;
                 case 4:
-                    System.out.println("Base: ");
+                    System.out.print("Base: ");
                     b = ler.nextDouble();
-                    System.out.println("Altura: ");
+                    System.out.print("Altura: ");
                     a = ler.nextDouble();
                     f = new Triangulo(b, a);
                     break;
                 case 5:
-                    System.out.println("Diagonal Maior: ");
+                    System.out.print("Diagonal Maior: ");
                     double d_maior = ler.nextDouble();
-                    System.out.println("Diagonal Menor: ");
+                    System.out.print("Diagonal Menor: ");
                     double d_menor = ler.nextDouble();
                     f = new Losango(d_maior, d_menor);
                     break;
@@ -90,15 +113,13 @@ public class Main {
                     double aresta = ler.nextDouble();
                     f = new Hipercubo(dimensoes, aresta);
                     break;
-
                 case 7:
                     System.out.print("Curvatura: ");
                     double curvatura = ler.nextDouble();
                     System.out.print("Raio máximo: ");
-                    double Raio_max = ler.nextDouble();
-                    f = new Paraboloide(curvatura, Raio_max);
+                    double raio_max = ler.nextDouble();
+                    f = new Paraboloide(curvatura, raio_max);
                     break;
-
                 case 8:
                     System.out.print("Base maior: ");
                     double Bmaior = ler.nextDouble();
@@ -108,21 +129,17 @@ public class Main {
                     double altura = ler.nextDouble();
                     f = new Trapezio(Bmaior, Bmenor, altura);
                     break;
-
                 default:
                     System.out.println("Forma inválida!");
                     return;
-
             }
             System.out.println("Área calculada: " + f.calculaArea());
-
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
     }
 
     public static void calcularSomaAreas() {
-
         ArrayList<Forma> formas = new ArrayList<>();
 
         formas.add(new Circulo(3));
@@ -135,11 +152,9 @@ public class Main {
         formas.add(new Trapezio(10, 6, 4));
 
         double soma = 0;
-
         for (Forma f : formas) {
             soma += f.calculaArea();
         }
-
         System.out.println("Soma total das áreas: " + soma);
     }
 }
