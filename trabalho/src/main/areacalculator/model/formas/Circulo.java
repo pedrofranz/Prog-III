@@ -1,8 +1,9 @@
-public class Circulo extends Forma {
+package areacalculator.model.formas;
 
+public class Circulo extends Forma {
     private double raio;
 
-    public Circulo(double raio){
+    public Circulo(double raio) {
         if (raio <= 0) {
             throw new IllegalArgumentException("O raio deve ser maior que zero.");
         }
